@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+* {
+  /* @apply border-white border; */
+
+  @apply text-dark-typo;
+}
+
+.gradient-hero {
+  background: rgb(13, 15, 17);
+  background: linear-gradient(0deg, rgba(13, 15, 17, 1) 16%, rgba(13, 15, 17, 0.8785714969581583) 56%, rgba(255, 255, 255, 0) 100%, rgba(255, 255, 255, 0) 100%);
+}
+
+.swiper-pagination {
+  position: absolute;
+  bottom: -50px;
+}
