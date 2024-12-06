@@ -4,10 +4,10 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  @apply bg-dark-bg;
 }
 * {
   /* @apply border-white border; */
-
   @apply text-dark-typo;
 }
 
