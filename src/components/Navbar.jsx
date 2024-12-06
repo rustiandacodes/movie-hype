@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const [navbg, setNavBg] = useState();
+  const changeNavBg = () => {
+    window.scrollY >= 100 ? setNavBg(true) : setNavBg(false);
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', changeNavBg);
+    return () => {
+      window.removeEventListener('scroll', changeNavBg);
+    };
+  }, []);
+
   return (
     <>
-      <div className="fixed w-full z-40">
+      <div onScroll={changeNavBg} className={`${navbg === true ? 'bg-dark-bg duration-500 shadow-white opacity-95' : ''} fixed w-full z-40`}>
         <div className="container mx-auto flex justify-between gap-5 lg:p-8 p-5 items-center  text-dark-typo">
           <Link to={'/'} className="text-2xl font-bold shadow-white">
             MOVIE

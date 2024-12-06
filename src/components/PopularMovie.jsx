@@ -6,7 +6,7 @@ const PopularMovie = () => {
 
   useEffect(() => {
     getPopularMovies(1).then((result) => {
-      setMovies(result);
+      setMovies(result.slice(0, 18));
     });
   }, []);
 
@@ -15,10 +15,10 @@ const PopularMovie = () => {
       <div>
         <div className="container mx-auto lg:p-8 p-5">
           <h1 className="text-lg font-bold mb-5">Popular Of The Week</h1>
-          <div className="flex justify-center items-center flex-wrap lg:gap-10 md:gap-5 gap-3">
+          <div className="flex justify-around flex-wrap lg:gap-2 md:gap-5 gap-3">
             {movies.length > 0 &&
               movies.map((movie, i) => (
-                <div className="relative w-[48%] lg:w-[12%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer" key={i}>
+                <div className="relative w-[48%] lg:w-[10%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer" key={i}>
                   <img className=" w-full " src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
                   <div className="absolute bottom-0 left-0 right-0 top-0 bg-gradient-to-t from-black">
                     <div className="absolute bottom-0 left-0 right-0 lg:px-3 lg:py-5 p-2">
