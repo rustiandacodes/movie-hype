@@ -2,54 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { getDiscoverMovies, findGenre } from '../services/tmdbApi';
 
 const Discover = () => {
-  const [page, setPage] = useState(8);
+  const [page, setPage] = useState(4);
   const [movies, setMovies] = useState([]);
-  const [movies2, setMovies2] = useState([]);
-  const [movies3, setMovies3] = useState([]);
-  const [movies4, setMovies4] = useState([]);
-  const [movies5, setMovies5] = useState([]);
-  const [movies6, setMovies6] = useState([]);
-  const [movies7, setMovies7] = useState([]);
 
-  let discover = [].concat(movies, movies2, movies3, movies4, movies5, movies6, movies7);
+  // let discover = [].concat(movies);
 
   useEffect(() => {
     getDiscoverMovies(2).then((result) => {
       setMovies(result);
     });
-    getDiscoverMovies(3).then((result) => {
-      setMovies2(result);
-    });
-    getDiscoverMovies(4).then((result) => {
-      setMovies3(result);
-    });
-    getDiscoverMovies(5).then((result) => {
-      setMovies4(result);
-    });
-    getDiscoverMovies(6).then((result) => {
-      setMovies5(result);
-    });
-    getDiscoverMovies(7).then((result) => {
-      setMovies6(result);
-    });
-    getDiscoverMovies(8).then((result) => {
-      setMovies7(result);
-    });
   }, []);
 
-  // const showMore = async () => {
-  //   setPage(page + 1);
-  //   const movie = await getDiscoverMovies(page);
-  //   discover.concat(movie);
-  //   console.log(discover);
-  // };
+  const showMore = async () => {
+    setPage(page + 1);
+    const movie = await getDiscoverMovies(page);
+    setMovies(movies.concat(movie));
+  };
   return (
     <>
       <div className="container mx-auto md:py-32 py-20 px-5 md:px-0">
         <div className="flex justify-center flex-wrap lg:gap-2 md:gap-5 gap-3">
-          {discover.length > 0 &&
-            discover.map((movie, i) => (
-              <div className="relative w-[30%] lg:w-[10%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer" key={i}>
+          {movies.length > 0 &&
+            movies.map((movie, i) => (
+              <div className="relative w-[30%] lg:w-[13%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer" key={i}>
                 <img className=" w-full " src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
                 <div className="absolute bottom-0 left-0 right-0 top-0 bg-gradient-to-t from-black">
                   <div className="absolute bottom-0 left-0 right-0 lg:px-3 lg:py-5 p-2">
@@ -72,7 +47,7 @@ const Discover = () => {
               </div>
             ))}
         </div>
-        <div className="absolute -mt-56 right-0 left-0 w-full h-64 gradient-hero">
+        <div className="absolute -mt-[25rem] right-0 left-0 w-full h-[25rem] gradient-hero">
           <div className="flex justify-center items-baseline lg:flex-row py-10 text-sm md:text-base">
             <button className="py-2.5 px-8 border-2 border-dark-primary text-dark-primary mt-48 rounded-lg" onClick={() => showMore()}>
               Show More
