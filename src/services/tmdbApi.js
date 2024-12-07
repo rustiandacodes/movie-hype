@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-// const baseUrl = import.meta.env.VITE_BASE_URL;
-// const apiKey = import.meta.env.API_KEY;
-
 const baseUrl = 'https://api.themoviedb.org/3/movie';
 const apiKey = 'fc09c7946adc53bb58eb160030e364ac';
 
