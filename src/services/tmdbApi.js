@@ -96,6 +96,10 @@ export const getPopularMovies = async (page = 1) => {
   const movies = await axios.get(`${baseUrl}/popular?language=en-US&page=${page}&api_key=${apiKey}`);
   return movies.data.results;
 };
+export const getDiscoverMovies = async (page = 1) => {
+  const movies = await axios.get(` https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}&api_key=${apiKey}`);
+  return movies.data.results;
+};
 
 export const getTopRatedMovies = async (page = 1) => {
   const movies = await axios.get(`${baseUrl}/top_rated?language=en-US&page=${page}&api_key=${apiKey}`);

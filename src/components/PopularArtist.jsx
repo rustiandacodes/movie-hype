@@ -50,10 +50,12 @@ const PopularArtist = () => {
           {artist.length > 0 &&
             artist.map((list, i) => (
               <SwiperSlide key={i}>
-                <div className="gap-2 p-2 bg-dark-unit rounded-lg overflow-hidden">
+                <div className="relative rounded-lg overflow-hidden">
                   <img src={`https://image.tmdb.org/t/p/w500/${list.profile_path}`} alt="poster" />
-                  <div className="flex justify-center">
-                    <h2 className="text-sm text-center mt-2 font-bold w-fit">{list.name.slice(0, 15)}</h2>
+                  <div className="absolute z-40 bottom-0 left-0 right-0 h-full bg-gradient-to-t from-black">
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <h2 className="font-bold text-base truncate">{list.name}</h2>
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>

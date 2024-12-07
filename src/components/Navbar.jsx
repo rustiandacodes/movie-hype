@@ -29,9 +29,7 @@ const Navbar = () => {
             <li>
               <Link to={'/discover'}>Discover</Link>
             </li>
-            <li>
-              <Link to={'/upcoming'}>Up Coming</Link>
-            </li>
+
             <li>
               <Link to={'/upcoming'}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-dark-typo">
