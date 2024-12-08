@@ -84,6 +84,8 @@ const genres = [
   },
 ];
 
+// homepage
+
 export const getNowPlayingMovies = async (page = 1) => {
   const movies = await axios.get(`${baseUrl}/now_playing?language=en-US&page=${page}&api_key=${apiKey}`);
   return movies.data.results;
@@ -93,24 +95,28 @@ export const getPopularMovies = async (page = 1) => {
   const movies = await axios.get(`${baseUrl}/popular?language=en-US&page=${page}&api_key=${apiKey}`);
   return movies.data.results;
 };
-export const getDiscoverMovies = async (page = 1) => {
-  const movies = await axios.get(` https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}&api_key=${apiKey}`);
-  return movies.data.results;
-};
 
 export const getTopRatedMovies = async (page = 1) => {
   const movies = await axios.get(`${baseUrl}/top_rated?language=en-US&page=${page}&api_key=${apiKey}`);
   return movies.data.results;
 };
 
-export const getUpComingMovies = async (page = 1) => {
-  const movies = await axios.get(`${baseUrl}/upcoming?language=en-US&page=${page}&api_key=${apiKey}`);
+// discover
+export const getDiscoverMovies = async (page = 1) => {
+  const movies = await axios.get(` https://api.themoviedb.org/3/discover/movie?language=en-US&page=${page}&api_key=${apiKey}`);
   return movies.data.results;
 };
 
-export const getDetailMovie = async (movie_id) => {
+// detail
+
+export const getDetail = async (movie_id) => {
+  const movies = await axios.get(`${baseUrl}/${movie_id}?api_key=${apiKey}`);
+  return movies.data;
+};
+
+export const getVideos = async (movie_id) => {
   const movies = await axios.get(`${baseUrl}/${movie_id}videos?api_key=${apiKey}&append_to_response=videos`);
-  return movies;
+  return movies.data;
 };
 
 export const getReviews = async (movie_id) => {
@@ -122,6 +128,12 @@ export const getSimilarMovie = async (movie_id) => {
   const movies = await axios.get(`${baseUrl}/${movie_id}/similar?language=en-US&page=1&api_key=${apiKey}`);
   return movies.data.results;
 };
+export const getCredit = async (movie_id) => {
+  const movies = await axios.get(`${baseUrl}/${movie_id}/credits?api_key=${apiKey}`);
+  return movies.data;
+};
+
+//  https://api.themoviedb.org/3/movie/{movie_id}/credits
 
 export const getGenre = async () => {
   const movies = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`);

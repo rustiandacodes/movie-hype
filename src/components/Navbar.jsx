@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [navbg, setNavBg] = useState();
   const changeNavBg = () => {
-    window.scrollY >= 100 ? setNavBg(true) : setNavBg(false);
+    window.scrollY >= 10 ? setNavBg(true) : setNavBg(false);
   };
   useEffect(() => {
     window.addEventListener('scroll', changeNavBg);

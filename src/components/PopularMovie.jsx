@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getPopularMovies, findGenre } from '../services/tmdbApi';
+import { useNavigate } from 'react-router-dom';
 
 const PopularMovie = () => {
   const [movies, setMovies] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     getPopularMovies(1).then((result) => {
@@ -18,7 +20,13 @@ const PopularMovie = () => {
           <div className="flex justify-around flex-wrap lg:gap-2 md:gap-5 gap-3">
             {movies.length > 0 &&
               movies.map((movie, i) => (
-                <div className="relative w-[48%] lg:w-[10%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer" key={i}>
+                <div
+                  onClick={() => {
+                    navigate(`/detail/${movie.id}`);
+                  }}
+                  className="relative w-[48%] lg:w-[10%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer"
+                  key={i}
+                >
                   <img className=" w-full " src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
                   <div className="absolute bottom-0 left-0 right-0 top-0 bg-gradient-to-t from-black">
                     <div className="absolute bottom-0 left-0 right-0 lg:px-3 lg:py-5 p-2">
