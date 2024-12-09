@@ -1,6 +1,7 @@
 import { getNowPlayingMovies, findGenre } from '../services/tmdbApi';
 import { A11y, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -11,6 +12,7 @@ import { useEffect, useState } from 'react';
 
 const Heroes = () => {
   const [movies, setMovies] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     getNowPlayingMovies().then((result) => {
@@ -60,7 +62,14 @@ const Heroes = () => {
                         </svg>
                         <span>Watch Trailer</span>
                       </button>
-                      <button className="py-2.5 px-8 border-2 border-dark-primary text-dark-primary rounded-lg">View Detail</button>
+                      <button
+                        onClick={() => {
+                          navigate(`/detail/${movie.id}`);
+                        }}
+                        className="py-2.5 px-8 border-2 border-dark-primary text-dark-primary rounded-lg"
+                      >
+                        View Detail
+                      </button>
                     </div>
                   </div>
                 </div>

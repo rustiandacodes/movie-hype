@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getTopRatedMovies, findGenre } from '../services/tmdbApi';
 import { A11y, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -11,6 +12,7 @@ import 'swiper/css/scrollbar';
 
 const TopRated = () => {
   const [movies, setMovies] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     getTopRatedMovies().then((result) => {
@@ -52,7 +54,12 @@ const TopRated = () => {
             {movies.length > 0 &&
               movies.map((movie, i) => (
                 <SwiperSlide key={i}>
-                  <div className="flex items-center px-5 py-8 gap-2 bg-dark-unit rounded-lg overflow-hidden">
+                  <div
+                    onClick={() => {
+                      navigate(`/detail/${movie.id}`);
+                    }}
+                    className="flex items-center px-5 py-8 gap-2 bg-dark-unit rounded-lg overflow-hidden cursor-pointer"
+                  >
                     <p className="font-semibold text-5xl">{i + 1}</p>
                     <img className="h-[8rem] w-[5rem] rounded-lg" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
                     <div>
