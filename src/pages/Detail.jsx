@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getVideos, getCredit, getSimilarMovie, getDetail, findGenre } from '../services/tmdbApi';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y, Navigation } from 'swiper/modules';
@@ -13,6 +13,7 @@ import 'swiper/css/scrollbar';
 
 const Detail = () => {
   let params = useParams();
+  let navigate = useNavigate();
   const [detail, setDetail] = useState([]);
   const [genres, setGenres] = useState([]);
   const [trailer, setTrailel] = useState([]);
@@ -23,10 +24,6 @@ const Detail = () => {
   const [similar, setSimilar] = useState([]);
 
   useEffect(() => {
-    // const findJob = (jobName) => {
-    //   let res = crew.find((item) => item.job === jobName);
-    //   return res;
-    // };
     getDetail(params.id).then((result) => {
       setDetail(result);
     });
@@ -49,8 +46,7 @@ const Detail = () => {
       setSimilar(result);
     });
   }, []);
-
-  console.log(writer);
+  console.log(detail);
 
   const timeConvert = (n) => {
     const num = n;
@@ -61,6 +57,11 @@ const Detail = () => {
     return rhours + 'h ' + rminutes + 'm';
   };
 
+  const handlePage = (id) => {
+    navigate(`/detail/${id}`);
+    window.location.reload();
+  };
+
   return (
     <>
       <div>
@@ -68,8 +69,8 @@ const Detail = () => {
           <img className="lg:w-screen blur-md h-screen hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.backdrop_path}`} alt="poster" />
           <div className="absolute h-screen bg-black top-0 right-0 left-0 opacity-80 md:block hidden"></div>
         </div>
-        <div className="absolute top-0 left-0 right-0 lg:py-32 lg:px-52 container mx-auto flex flex-col justify-center items-center lg:flex-row lg:gap-10 gap-5">
-          <img className="lg:h-96 lg:rounded-lg hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} alt="poster" />
+        <div className="absolute top-0 md:top-24 lg:top-0 left-0 right-0 lg:py-32 lg:px-52 container mx-auto flex flex-col justify-center items-center md:flex-row lg:gap-10 gap-5">
+          <img className="lg:h-96 md:h-[35rem] md:rounded-lg hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} alt="poster" />
           {/* descriptiom desktop */}
           <div className="px-5 hidden md:block">
             <p className="text-2xl font-bold mb-1">{detail.title}</p>
@@ -89,26 +90,18 @@ const Detail = () => {
             <p className={`italic mb-1 ${detail.tagline === '' ? 'hidden' : 'block'} text-gray-300`}>"{detail.tagline}"</p>
             <p className="font-bold text-lg mb-1">Overview</p>
             <p className="mb-5 text-sm md:text-base">{detail.overview}</p>
-            <button className="bg-dark-primary p-3 rounded-lg flex items-center justify-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
-              </svg>
-              <span>Watch Trailer</span>
-            </button>
             <div className="mt-8  items-center gap-10 hidden md:flex">
+              <button className="bg-dark-primary p-3 rounded-lg flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                </svg>
+                <span>Watch Trailer</span>
+              </button>
               <div>
                 <p className="text-lg font-bold cursor-pointer hover:opacity-50 hover:duration-300">{director.name}</p>
                 <p className="text-sm">Director</p>
               </div>
-              {writer ? (
-                <div>
-                  <p className="text-lg font-bold cursor-pointer hover:opacity-50 hover:duration-300">{writer.name}</p>
-                  <p className="text-sm">Writer</p>
-                </div>
-              ) : (
-                ''
-              )}
               <div className="flex gap-2 items-center cursor-pointer hover:opacity-50 hover:duration-300">
                 <div className="text-end text-sm">
                   <p>Crew and</p>
@@ -152,6 +145,29 @@ const Detail = () => {
               <span>Watch Trailer</span>
             </button>
           </div>
+
+          <div className="container mx-auto px-5 md:py-10 md:hidden">
+            <div className="flex gap-5 my-10">
+              <div className="relative rounded-lg overflow-hidden w-[40%] lg:w-[9%] md:w-[30%]  h-full hover:scale-110 hover:duration-300 cursor-pointer">
+                <img src={`https://image.tmdb.org/t/p/w500/${director.profile_path}`} alt="poster" />
+                <div className="absolute z-40 bottom-0 left-0 right-0 h-full bg-gradient-to-t from-black">
+                  <div className="absolute bottom-0 left-0 right-0 p-3">
+                    <h2 className="font-bold md:text-base text-sm truncate">{director.name}</h2>
+                    <h2 className="md:text-sm text-xs truncate">Director</h2>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-2 items-center cursor-pointer hover:opacity-50 hover:duration-300 px-5 mb-5">
+                <div className="text-end text-base underline">
+                  <p>Crew and</p>
+                  <p>Other Cast</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
+            </div>
+          </div>
           {/* cast */}
           <div className="container mx-auto px-5 md:py-10">
             <h1 className="text-lg font-bold mb-5">Featured Cast</h1>
@@ -160,7 +176,7 @@ const Detail = () => {
               spaceBetween={0}
               breakpoints={{
                 350: {
-                  slidesPerView: 4,
+                  slidesPerView: 3,
                   spaceBetween: 15,
                 },
                 768: {
@@ -193,6 +209,42 @@ const Detail = () => {
                   </SwiperSlide>
                 ))}
             </Swiper>
+          </div>
+          {/* Similar Movie */}
+          <div className="container mx-auto px-5 py-10 md:py-0">
+            <h1 className="text-lg font-bold mb-5">Recomendations</h1>
+            <div className="flex justify-around flex-wrap lg:gap-2 md:gap-5 gap-3">
+              {similar.length > 0 &&
+                similar.map((movie, i) => (
+                  <div
+                    onClick={() => {
+                      handlePage(movie.id);
+                    }}
+                    className="relative w-[48%] lg:w-[9%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer"
+                    key={i}
+                  >
+                    <img className=" w-full " src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
+                    <div className="absolute bottom-0 left-0 right-0 top-0 bg-gradient-to-t from-black">
+                      <div className="absolute bottom-0 left-0 right-0 lg:px-3 lg:py-5 p-2">
+                        <h2 className="text-sm md:text-base font-bold shadow-sm truncate">{movie.title}</h2>
+                        <div className="flex flex-wrap gap-1 items-center text-xs mb-2 text-dark-typo2">
+                          <div className="flex items-center gap-1 text-xs">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 fill-yellow-500">
+                              <path
+                                fillRule="evenodd"
+                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <p>{movie.vote_average}</p>
+                          </div>
+                          <div>• {movie.genre_ids.length > 0 ? findGenre(movie.genre_ids[0]).name : ''}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>

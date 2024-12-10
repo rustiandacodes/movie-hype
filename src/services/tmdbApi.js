@@ -125,9 +125,10 @@ export const getReviews = async (movie_id) => {
 };
 
 export const getSimilarMovie = async (movie_id) => {
-  const movies = await axios.get(`${baseUrl}/${movie_id}/similar?language=en-US&page=1&api_key=${apiKey}`);
+  const movies = await axios.get(`${baseUrl}/${movie_id}/recommendations?language=en-US&page=1&api_key=${apiKey}`);
   return movies.data.results;
 };
+
 export const getCredit = async (movie_id) => {
   const movies = await axios.get(`${baseUrl}/${movie_id}/credits?api_key=${apiKey}`);
   return movies.data;
