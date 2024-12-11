@@ -55,18 +55,18 @@ const Heroes = () => {
                     </div>
                     <p className="mb-5 text-sm md:text-base">{movie.overview.slice(0, 150)} ...</p>
                     <div className="flex flex-col lg:flex-row gap-3 text-sm md:text-base">
-                      <button className="bg-dark-primary p-3 rounded-lg flex items-center justify-center gap-2">
+                      {/* <button className="bg-dark-primary p-3 rounded-lg flex items-center justify-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
                         </svg>
                         <span>Watch Trailer</span>
-                      </button>
+                      </button> */}
                       <button
                         onClick={() => {
                           navigate(`/detail/${movie.id}`);
                         }}
-                        className="py-2.5 px-8 border-2 border-dark-primary text-dark-primary rounded-lg"
+                        className="py-2.5 px-8  bg-dark-primary  rounded-lg"
                       >
                         View Detail
                       </button>
