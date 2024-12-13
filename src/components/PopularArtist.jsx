@@ -35,7 +35,11 @@ const PopularArtist = () => {
               spaceBetween: 15,
             },
             1024: {
-              slidesPerView: 8,
+              slidesPerView: 6,
+              spaceBetween: 15,
+            },
+            1440: {
+              slidesPerView: 10,
               spaceBetween: 15,
             },
           }}

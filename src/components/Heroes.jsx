@@ -36,7 +36,7 @@ const Heroes = () => {
           movies.map((movie, i) => (
             <SwiperSlide key={i}>
               {/* poster */}
-              <div className="md:h-[20rem] lg:h-[30rem] gap-5 flex md:flex-row-reverse lg:justify-center items-center bg-dark-bg ">
+              <div className="md:h-[20rem] xl:h-[30rem] gap-5 flex md:flex-row-reverse mt-16 lg:justify-center items-center bg-dark-bg ">
                 <div className="h-full lg:w-[50%] relative">
                   <div className="hidden md:block absolute right-0 left-0 bottom-0 h-screen bg-gradient-to-r from-dark-bg z-30"></div>
                   <div className="md:hidden block absolute right-0 left-0 bottom-0 h-screen bg-gradient-to-t from-black z-30"></div>

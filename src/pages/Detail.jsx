@@ -69,7 +69,7 @@ const Detail = () => {
           <img className="w-full md:w-full blur-md hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.backdrop_path}`} alt="poster" />
           <div className="absolute h-screen bg-black top-0 right-0 left-0 opacity-80 md:block hidden"></div>
         </div>
-        <div className="hidden absolute top-0 md:top-16 lg:top-0 left-0 right-0 lg:py-32 lg:px-52 container mx-auto lg:flex flex-col md:flex-row lg:gap-10 gap-5">
+        <div className="hidden absolute top-0 md:top-16 lg:top-0 left-0 right-0 lg:py-32 xl:px-52 lg:px-20 container mx-auto lg:flex flex-col md:flex-row lg:gap-10 gap-5">
           <img className="lg:h-96 md:h-[22rem] md:rounded-lg hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} alt="poster" />
           {/* descriptiom desktop */}
           <div className="px-5 md:px-0 hidden lg:block">
@@ -165,9 +165,9 @@ const Detail = () => {
             </div>
           </div>
           {/* trailer */}
-          <div className={`container mx-auto ${watchTrailer ? 'block' : 'hidden'} md:px-20 bg-black md:mt-10 flex justify-center`}>
+          <div className={`container mx-auto ${watchTrailer ? 'block' : 'hidden'} lg:px-20 bg-black md:mt-10 flex justify-center`}>
             <iframe
-              class="md:w-[80%] w-full aspect-video"
+              class="md:w-[100%] lg:w-[80%] w-full aspect-video"
               src={`https://www.youtube.com/embed/${trailer}`}
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -206,7 +206,7 @@ const Detail = () => {
 
           {/* cast */}
           <div className="container mx-auto px-5 md:pb-10">
-            <h1 className="text-lg font-bold lg:mb-5">Featured Cast</h1>
+            <h1 className="text-lg font-bold mb-5">Featured Cast</h1>
             <Swiper
               modules={[A11y, Navigation]}
               spaceBetween={0}
@@ -220,6 +220,10 @@ const Detail = () => {
                   spaceBetween: 15,
                 },
                 1024: {
+                  slidesPerView: 6,
+                  spaceBetween: 15,
+                },
+                1440: {
                   slidesPerView: 10,
                   spaceBetween: 15,
                 },
@@ -233,7 +237,7 @@ const Detail = () => {
               {credit.length > 0 &&
                 credit.map((list, i) => (
                   <SwiperSlide key={i}>
-                    <div className="relative rounded-lg overflow-hidden flex justify-center items-center md:h-[18vh]">
+                    <div className="relative rounded-lg overflow-hidden flex justify-center items-center h-[18vh] lg:h-[28vh] xl:h-[25vh]">
                       {list.profile_path ? (
                         <img src={`https://image.tmdb.org/t/p/w500/${list.profile_path}`} alt="poster" />
                       ) : (
@@ -261,7 +265,7 @@ const Detail = () => {
           {/* Similar Movie */}
           <div className="container mx-auto px-5 py-10 md:py-0">
             <h1 className="text-lg font-bold mb-5">Recomendations</h1>
-            <div className="grid md:grid-cols-5 lg:grid-cols-10 grid-cols-2 gap-4">
+            <div className="grid xl:grid-cols-10 md:grid-cols-5 grid-cols-2 gap-4">
               {similar.length > 0 &&
                 similar.map((movie, i) => (
                   <div
@@ -272,9 +276,9 @@ const Detail = () => {
                     key={i}
                   >
                     {movie.poster_path ? (
-                      <img className="w-full " src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
+                      <img className="w-full" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
                     ) : (
-                      <div className="flex justify-center items-center lg:h-[24vh] h-[30vh]">
+                      <div className="flex justify-center items-center lg:h-[24vh] h-[30vh] md:h-[15vh]">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-20">
                           <path
                             fillRule="evenodd"
@@ -289,7 +293,7 @@ const Detail = () => {
                       <div className="absolute bottom-0 left-0 right-0 lg:px-3 lg:py-5 p-2">
                         <h2 className="text-sm md:text-base font-bold shadow-sm truncate">{movie.title}</h2>
                         <div className="flex flex-wrap gap-1 items-center text-xs mb-2 text-dark-typo2">
-                          {/* <div className="flex items-center gap-1 text-xs">
+                          <div className="flex items-center gap-1 text-xs">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 fill-yellow-500">
                               <path
                                 fillRule="evenodd"
@@ -298,8 +302,8 @@ const Detail = () => {
                               />
                             </svg>
                             <p>{movie.vote_average}</p>
-                          </div> */}
-                          <div>{movie.genre_ids.length > 0 ? findGenre(movie.genre_ids[0]).name : ''}</div>
+                          </div>
+                          <div> • {movie.genre_ids.length > 0 ? findGenre(movie.genre_ids[0]).name : ''}</div>
                         </div>
                       </div>
                     </div>
