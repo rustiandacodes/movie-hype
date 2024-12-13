@@ -36,24 +36,24 @@ const Heroes = () => {
           movies.map((movie, i) => (
             <SwiperSlide key={i}>
               {/* poster */}
-              <div className="h-screen lg:h-[28rem] gap-5 flex lg:flex-row-reverse justify-center items-center bg-dark-bg ">
+              <div className="md:h-[20rem] lg:h-[30rem] gap-5 flex md:flex-row-reverse lg:justify-center items-center bg-dark-bg ">
                 <div className="h-full lg:w-[50%] relative">
-                  <div className="hidden lg:block absolute right-0 left-0 bottom-0 h-screen bg-gradient-to-r lg:bg-gradient-to-r from-dark-bg z-30"></div>
-                  <div className="lg:hidden block absolute right-0 left-0 bottom-0 h-screen gradient-hero z-30"></div>
-                  <img className="lg:hidden w-screen" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
-                  <img className="hidden lg:block w-screen lg:w-full lg:h-full" src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="poster" />
+                  <div className="hidden md:block absolute right-0 left-0 bottom-0 h-screen bg-gradient-to-r from-dark-bg z-30"></div>
+                  <div className="md:hidden block absolute right-0 left-0 bottom-0 h-screen bg-gradient-to-t from-black z-30"></div>
+                  <img className="md:hidden w-screen" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />
+                  <img className="hidden md:block w-screen md:w-full md:h-full" src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="poster" />
                 </div>
                 {/* description */}
-                <div className="absolute bottom-0 w-full p-5 md:px-10 z-40 lg:static lg:w-[50%]">
+                <div className="absolute bottom-0 w-full p-5 z-40 lg:static lg:w-[50%]">
                   <div className="lg:p-[4.5rem] p-0">
-                    <p className="font-bold text-2xl md:text-4xl mb-2">{movie.title}</p>
-                    <div className="flex flex-wrap gap-2 items-center text-sm md:text-base mb-2 text-dark-typo2">
+                    <p className="font-bold text-2xl mb-2">{movie.title}</p>
+                    <div className="flex flex-wrap gap-2 items-center text-sm mb-2 text-dark-typo2">
                       <p>{movie.release_date.slice(0, 4)}</p>
                       {movie.genre_ids.map((genre, i) => (
                         <span key={i}>• {findGenre(genre).name}</span>
                       ))}
                     </div>
-                    <p className="mb-5 text-sm md:text-base">{movie.overview.slice(0, 150)} ...</p>
+                    <p className="mb-5 text-sm">{movie.overview.slice(0, 150)} ...</p>
                     <div className="flex flex-col lg:flex-row gap-3 text-sm md:text-base">
                       {/* <button className="bg-dark-primary p-3 rounded-lg flex items-center justify-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

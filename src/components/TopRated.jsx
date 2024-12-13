@@ -23,7 +23,7 @@ const TopRated = () => {
   return (
     <>
       <div className="bg-dark-bg">
-        <div className="container mx-auto lg:p-8 p-5">
+        <div className="lg:px-20 p-5">
           <h1 className="text-lg font-bold mb-5">Top Rated</h1>
           <Swiper
             modules={[A11y, Pagination]}

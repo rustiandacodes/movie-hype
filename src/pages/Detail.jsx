@@ -65,14 +65,14 @@ const Detail = () => {
   return (
     <>
       <div>
-        <div className="relative lg:h-[40rem] overflow-hidden">
-          <img className="lg:w-screen blur-md h-screen hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.backdrop_path}`} alt="poster" />
+        <div className={`relative lg:h-[40rem] overflow-hidden hidden lg:block `}>
+          <img className="w-full md:w-full blur-md hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.backdrop_path}`} alt="poster" />
           <div className="absolute h-screen bg-black top-0 right-0 left-0 opacity-80 md:block hidden"></div>
         </div>
-        <div className="absolute top-0 md:top-24 lg:top-0 left-0 right-0 lg:py-32 lg:px-52 container mx-auto flex flex-col justify-center items-center md:flex-row lg:gap-10 gap-5">
-          <img className="lg:h-96 md:h-[35rem] md:rounded-lg hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} alt="poster" />
+        <div className="hidden absolute top-0 md:top-16 lg:top-0 left-0 right-0 lg:py-32 lg:px-52 container mx-auto lg:flex flex-col md:flex-row lg:gap-10 gap-5">
+          <img className="lg:h-96 md:h-[22rem] md:rounded-lg hidden md:block" src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} alt="poster" />
           {/* descriptiom desktop */}
-          <div className="px-5 hidden md:block">
+          <div className="px-5 md:px-0 hidden lg:block">
             <p className="text-2xl font-bold mb-1">{detail.title}</p>
             <div className="flex items-center gap-2 mb-3 text-sm flex-wrap">
               <div className="flex items-center gap-1">
@@ -91,7 +91,7 @@ const Detail = () => {
             <p className={`italic mb-1 ${detail.tagline === '' ? 'hidden' : 'block'} text-gray-300`}>"{detail.tagline}"</p>
             <p className="font-bold text-lg mb-1">Overview</p>
             <p className="mb-5 text-sm md:text-base">{detail.overview}</p>
-            <div className="mt-8  items-center gap-10 hidden md:flex">
+            <div className="mt-8 items-center md:items-start gap-10 hidden md:flex flex-col lg:flex-row">
               <button
                 onClick={() => {
                   setWatchTrailer(true);
@@ -104,62 +104,65 @@ const Detail = () => {
                 </svg>
                 <span>Watch Trailer</span>
               </button>
-              {director ? (
-                <div>
-                  <p className="text-lg font-bold cursor-pointer hover:opacity-50 hover:duration-300">{director.name}</p>
-                  <p className="text-sm">Director</p>
+              <div className="flex gap-5">
+                {director ? (
+                  <div>
+                    <p className="text-lg font-bold cursor-pointer hover:opacity-50 hover:duration-300">{director.name}</p>
+                    <p className="text-sm">Director</p>
+                  </div>
+                ) : (
+                  ''
+                )}
+                <div className="flex gap-2 items-center cursor-pointer hover:opacity-50 hover:duration-300">
+                  <div className="text-end text-sm">
+                    <p>Crew and</p>
+                    <p>Other Cast</p>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
                 </div>
-              ) : (
-                ''
-              )}
-
-              <div className="flex gap-2 items-center cursor-pointer hover:opacity-50 hover:duration-300">
-                <div className="text-end text-sm">
-                  <p>Crew and</p>
-                  <p>Other Cast</p>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mb-10">
-          <img className="lg:h-96 lg:rounded-lg md:hidden" src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} alt="poster" />
-          {/* description phone */}
-          <div className="container mx-auto px-5 md:hidden py-8">
-            {/* description */}
-            <p className="text-2xl font-bold mb-1">{detail.title}</p>
-            <div className="flex items-center gap-2 mb-3 text-sm flex-wrap">
-              <div className="flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 fill-yellow-500">
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <p>{detail.vote_average}</p>
+        <div>
+          <div className="flex md:flex-row flex-col gap-2 md:pt-20 ">
+            <img className="md:h-[20rem] md:ml-5 md:rounded-lg lg:hidden md:w-[40%] h-full" src={`https://image.tmdb.org/t/p/w500/${detail.poster_path}`} alt="poster" />
+            {/* description phone */}
+            <div className="container mx-auto px-5 lg:hidden md:py-0 py-8">
+              {/* description */}
+              <p className="text-2xl font-bold mb-1">{detail.title}</p>
+              <div className="flex items-center gap-2 mb-3 text-sm flex-wrap">
+                <div className="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 fill-yellow-500">
+                    <path
+                      fillRule="evenodd"
+                      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <p>{detail.vote_average}</p>
+                </div>
+                • <p>{detail.release_date}</p> • {genres.length > 0 && genres.map((genre, i) => <span key={i}>{genre.name},</span>)}•<p>{timeConvert(detail.runtime)}</p>
               </div>
-              • <p>{detail.release_date}</p> • {genres.length > 0 && genres.map((genre, i) => <span key={i}>{genre.name},</span>)}•<p>{timeConvert(detail.runtime)}</p>
+              <p className={`italic mb-1 ${detail.tagline === '' ? 'hidden' : 'block'} text-gray-300`}>"{detail.tagline}"</p>
+              <p className="font-bold text-lg mb-1">Overview</p>
+              <p className="mb-5 text-sm md:text-base">{detail.overview}</p>
+              <button
+                onClick={() => {
+                  setWatchTrailer(true);
+                }}
+                className="bg-dark-primary p-3 rounded-lg flex items-center justify-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                </svg>
+                <span>Watch Trailer</span>
+              </button>
             </div>
-            <p className={`italic mb-1 ${detail.tagline === '' ? 'hidden' : 'block'} text-gray-300`}>"{detail.tagline}"</p>
-            <p className="font-bold text-lg mb-1">Overview</p>
-            <p className="mb-5 text-sm md:text-base">{detail.overview}</p>
-            <button
-              onClick={() => {
-                setWatchTrailer(true);
-              }}
-              className="bg-dark-primary p-3 rounded-lg flex items-center justify-center gap-2"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
-              </svg>
-              <span>Watch Trailer</span>
-            </button>
           </div>
           {/* trailer */}
           <div className={`container mx-auto ${watchTrailer ? 'block' : 'hidden'} md:px-20 bg-black md:mt-10 flex justify-center`}>
@@ -172,10 +175,11 @@ const Detail = () => {
             ></iframe>
           </div>
 
-          <div className="container mx-auto px-5 md:py-10 md:hidden">
-            <div className="flex gap-5 my-10">
+          <div className="container mx-auto px-5 lg:hidden">
+            <h1 className="text-lg font-bold md:mt-8 mb-3">Director</h1>
+            <div className="flex gap-5 mb-8">
               {director ? (
-                <div className="relative rounded-lg overflow-hidden w-[40%] lg:w-[9%] md:w-[30%]  h-full hover:scale-110 hover:duration-300 cursor-pointer">
+                <div className="relative rounded-lg overflow-hidden w-[40%] lg:w-[9%] md:w-[20%]  h-full hover:scale-110 hover:duration-300 cursor-pointer">
                   <img src={`https://image.tmdb.org/t/p/w500/${director.profile_path}`} alt="poster" />
                   <div className="absolute z-40 bottom-0 left-0 right-0 h-full bg-gradient-to-t from-black">
                     <div className="absolute bottom-0 left-0 right-0 p-3">
@@ -201,8 +205,8 @@ const Detail = () => {
           </div>
 
           {/* cast */}
-          <div className="container mx-auto px-5 md:py-10">
-            <h1 className="text-lg font-bold mb-5">Featured Cast</h1>
+          <div className="container mx-auto px-5 md:pb-10">
+            <h1 className="text-lg font-bold lg:mb-5">Featured Cast</h1>
             <Swiper
               modules={[A11y, Navigation]}
               spaceBetween={0}
@@ -229,7 +233,7 @@ const Detail = () => {
               {credit.length > 0 &&
                 credit.map((list, i) => (
                   <SwiperSlide key={i}>
-                    <div className="relative rounded-lg overflow-hidden flex justify-center items-center md:h-[22vh] h-[18vh]">
+                    <div className="relative rounded-lg overflow-hidden flex justify-center items-center md:h-[18vh]">
                       {list.profile_path ? (
                         <img src={`https://image.tmdb.org/t/p/w500/${list.profile_path}`} alt="poster" />
                       ) : (
@@ -257,14 +261,14 @@ const Detail = () => {
           {/* Similar Movie */}
           <div className="container mx-auto px-5 py-10 md:py-0">
             <h1 className="text-lg font-bold mb-5">Recomendations</h1>
-            <div className="flex justify-around items-center flex-wrap lg:gap-2 md:gap-5 gap-3 h-full">
+            <div className="grid md:grid-cols-5 lg:grid-cols-10 grid-cols-2 gap-4">
               {similar.length > 0 &&
                 similar.map((movie, i) => (
                   <div
                     onClick={() => {
                       handlePage(movie.id);
                     }}
-                    className="relative w-[48%] lg:w-[9%] md:w-[30%] overflow-hidden rounded-lg hover:scale-110 hover:duration-300 cursor-pointer"
+                    className="relative overflow-hidden rounded-lg hover:scale-110 hover:duration-300 cursor-pointer"
                     key={i}
                   >
                     {movie.poster_path ? (
@@ -285,7 +289,7 @@ const Detail = () => {
                       <div className="absolute bottom-0 left-0 right-0 lg:px-3 lg:py-5 p-2">
                         <h2 className="text-sm md:text-base font-bold shadow-sm truncate">{movie.title}</h2>
                         <div className="flex flex-wrap gap-1 items-center text-xs mb-2 text-dark-typo2">
-                          <div className="flex items-center gap-1 text-xs">
+                          {/* <div className="flex items-center gap-1 text-xs">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 fill-yellow-500">
                               <path
                                 fillRule="evenodd"
@@ -294,8 +298,8 @@ const Detail = () => {
                               />
                             </svg>
                             <p>{movie.vote_average}</p>
-                          </div>
-                          <div>• {movie.genre_ids.length > 0 ? findGenre(movie.genre_ids[0]).name : ''}</div>
+                          </div> */}
+                          <div>{movie.genre_ids.length > 0 ? findGenre(movie.genre_ids[0]).name : ''}</div>
                         </div>
                       </div>
                     </div>

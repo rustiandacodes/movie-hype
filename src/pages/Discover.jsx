@@ -20,15 +20,15 @@ const Discover = () => {
   };
   return (
     <>
-      <div className="container mx-auto md:py-32 py-20 px-5 md:px-0">
-        <div className="flex justify-center flex-wrap lg:gap-2 md:gap-5 gap-3">
+      <div className="md:py-32 p-20 px-5">
+        <div className="grid xl:grid-cols-10 md:grid-cols-5 lg:grid-cols-8 grid-cols-2 gap-4">
           {movies.length > 0 &&
             movies.map((movie, i) => (
               <div
                 onClick={() => {
                   navigate(`/detail/${movie.id}`);
                 }}
-                className="relative w-[30%] lg:w-[13%] md:w-[30%] overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer"
+                className="relative overflow-hidden rounded-lg h-full hover:scale-110 hover:duration-300 cursor-pointer"
                 key={i}
               >
                 <img className=" w-full " src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster" />

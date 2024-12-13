@@ -15,8 +15,8 @@ const Navbar = () => {
 
   return (
     <>
-      <div onScroll={changeNavBg} className={`${navbg === true ? 'bg-dark-bg duration-500 shadow-white opacity-95' : ''} fixed w-full z-40`}>
-        <div className="container mx-auto flex justify-between gap-5 lg:p-8 p-5 items-center  text-dark-typo">
+      <div onScroll={changeNavBg} className={`${navbg === true ? 'bg-dark-bg duration-500 shadow-white opacity-95' : ''} fixed w-full z-40 bg-gradient-to-b from-black`}>
+        <div className=" flex justify-between gap-5 lg:px-20 p-4 items-center  text-dark-typo">
           <Link to={'/'} className="text-2xl font-bold shadow-white">
             MOVIE
             <span className="text-dark-primary"> HYPE</span>

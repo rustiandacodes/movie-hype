@@ -20,7 +20,7 @@ const PopularArtist = () => {
 
   return (
     <>
-      <div className="container mx-auto lg:p-8 p-5">
+      <div className="lg:px-20 p-5">
         <h1 className="text-lg font-bold mb-5">Popular Artist</h1>
         <Swiper
           modules={[A11y, Navigation]}
@@ -35,7 +35,7 @@ const PopularArtist = () => {
               spaceBetween: 15,
             },
             1024: {
-              slidesPerView: 10,
+              slidesPerView: 8,
               spaceBetween: 15,
             },
           }}
@@ -50,7 +50,7 @@ const PopularArtist = () => {
           {artist.length > 0 &&
             artist.map((list, i) => (
               <SwiperSlide key={i}>
-                <div className="relative rounded-lg overflow-hidden md:h-[22vh] h-[18vh]">
+                <div className="relative rounded-lg overflow-hidden">
                   {list.profile_path ? (
                     <img src={`https://image.tmdb.org/t/p/w500/${list.profile_path}`} alt="poster" />
                   ) : (
@@ -67,7 +67,7 @@ const PopularArtist = () => {
 
                   <div className="absolute z-40 bottom-0 left-0 right-0 h-full bg-gradient-to-t from-black">
                     <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <h2 className="font-bold text-base truncate">{list.name}</h2>
+                      <h2 className="font-bold text-sm truncate">{list.name}</h2>
                     </div>
                   </div>
                 </div>
